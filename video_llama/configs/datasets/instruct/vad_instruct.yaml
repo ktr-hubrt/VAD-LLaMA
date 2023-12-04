@@ -1,0 +1,7 @@
+datasets:
+  vad_instruct:
+    data_type: image
+    build_info:
+      anno_dir: storage/lvhui/ucf/UCF_Instruct.json
+      eval_anno_dir: storage/lvhui/ucf/UCF_Instruct_eval.json
+      videos_dir: /storage/lvhui/ucf/
