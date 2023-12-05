@@ -5,7 +5,7 @@ This is an official implementation of VAD-LLaMA.
 To set up the environment, you can easily run the following command:
 ```
 conda env create -f environment.yml
-conda activate videollama
+conda activate vadllama
 ```
 
 # Data Preparation
