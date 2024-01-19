@@ -1,4 +1,4 @@
-This is an official implementation of VAD-LLaMA. 
+This is an official implementation of VAD-LLaMA: Video Anomaly Detection and Explanation via Large Language Models. Pdf version is available ar https://arxiv.org/abs/2401.05702.
 
     
 # Environment Setup
