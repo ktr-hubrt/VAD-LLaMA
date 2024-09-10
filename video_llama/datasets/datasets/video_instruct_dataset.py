@@ -61,37 +61,11 @@ class Video_Instruct_Dataset(BaseDataset):
             image_size=self.resize_size, n_frms = self.num_frm
         ).transform
         self.data_type = data_type
-        self.video_info = self.load_video_info()
           
     def _get_video_path(self, sample):
         rel_video_fp = sample['video']
         full_video_fp = os.path.join(self.vis_root,  rel_video_fp)
         return full_video_fp
-
-    def load_video_info(self):
-        video_info = {}
-        video_infofile = '/storage/lvhui/Anomaly_Detection_splits/AnnotationTrainVideoList.txt'
-        if video_infofile.endswith('txt'):
-            for line in open(video_infofile):
-                if line[-2] == ' ':
-                    line = line[:-2]
-                values = line.strip('\n').split(' ')
-
-                if len(values) == 1:
-                    continue
-                # print(line)
-                vid = values[0].split('/')[-1]
-                video_info[vid] = []
-
-                for i in range(1, len(values), 2):
-                    # print(len(values),values[i],values[i+1])
-                    video_info[vid].append([int(values[i]), int(values[i + 1])])
-                    # pdb.set_trace()
-            return video_info
-        else:
-            with open(video_infofile, 'rb') as f:
-                video_dict = pickle.load(f)
-            return video_dict
 
     def __getitem__(self, index):
         num_retries = 10  # skip error videos
@@ -109,16 +83,8 @@ class Video_Instruct_Dataset(BaseDataset):
                 else:
                     label_vad = 2
                 conversation_list = sample['QA']
-
-                vid = video_path.split('/')[-1]
-                if vid in self.video_info:
-                    ano_gt = self.video_info[vid]
-
-                    videoarray = np.zeros(ano_gt[-1][-1])
-                    for value in ano_gt:
-                        videoarray[value[0]:value[1]] = 1
-                else:
-                    videoarray = None
+                
+                videoarray = None
 
                 video, msg, tid, conversation_list, tids = load_video(
                     video_path=video_path,
