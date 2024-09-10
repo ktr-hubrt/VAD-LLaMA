@@ -70,7 +70,7 @@ class Video_Instruct_Dataset(BaseDataset):
 
     def load_video_info(self):
         video_info = {}
-        video_infofile = 'Anomaly_Detection_splits/AnnotationTrainVideoList.txt'
+        video_infofile = 'data/AnnotationTrainVideoList.txt'
         if video_infofile.endswith('txt'):
             for line in open(video_infofile):
                 if line[-2] == ' ':
